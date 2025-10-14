@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [Header("Refs")]
-    [SerializeField] private ApiCliente api;
+    [SerializeField] private ApiClient api;
     [SerializeField] private List<PlayerController> players;
 
     [Header("Config")]
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (api == null) api = FindObjectOfType<ApiCliente>();
+        if (api == null) api = FindObjectOfType<ApiClient>();
     }
 
     private void Start()
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(api.PostPlayerData(gameId, playerId.ToString(), data));
     }
 
-    // Callback desde ApiCliente
+    // Callback desde ApiClient
     public void OnDataReceived(int playerId, ServerData data)
     {
         var p = FindById(playerId);
@@ -87,10 +87,10 @@ public class GameManager : MonoBehaviour
             bool shouldBeLocal = (p.GetPlayerId() == localId);
             p.isLocal = shouldBeLocal;
 
-            var mover = p.GetComponent<LocalInputTransfer>();
+            var mover = p.GetComponent<LocalInputMover>();
             if (shouldBeLocal)
             {
-                if (!mover) p.gameObject.AddComponent<LocalInputTransfer>();
+                if (!mover) p.gameObject.AddComponent<LocalInputMover>();
             }
             else
             {

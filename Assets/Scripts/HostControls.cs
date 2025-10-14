@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class HostControls : MonoBehaviour
 {
     [Header("Refs")]
-    public ApiServidor server;
+    public ApiServer server;
     public GameManager gameManager;
 
     [Header("UI")]
